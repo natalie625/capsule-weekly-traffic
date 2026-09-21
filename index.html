@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capsule Weekly Traffic</title>
+<style>
+  :root {
+    --bg: #ffffff; --text: #1a1a1a; --text-muted: #666666; --text-faint: #999999;
+    --border: #e5e5e5; --card-bg: #fafafa; --pill-bg: #eef2ff; --pill-text: #3730a3;
+    --code-bg: #f1f1f1; --delta-up: #0a8a3f; --delta-down: #c0392b; --delta-flat: #888888;
+    --chart-line: #4f46e5; --chart-demo: #c2410c; --grid-line: #ececec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131316; --text: #e9e9ec; --text-muted: #9a9aa2; --text-faint: #75757c;
+      --border: #2a2a30; --card-bg: #1b1b1f; --pill-bg: #262a4d; --pill-text: #b7c0ff;
+      --code-bg: #24242a; --delta-up: #3ecf7e; --delta-down: #ff6b6b; --delta-flat: #9a9aa2;
+      --chart-line: #8b87f7; --chart-demo: #ff9757; --grid-line: #28282e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131316; --text: #e9e9ec; --text-muted: #9a9aa2; --text-faint: #75757c;
+    --border: #2a2a30; --card-bg: #1b1b1f; --pill-bg: #262a4d; --pill-text: #b7c0ff;
+    --code-bg: #24242a; --delta-up: #3ecf7e; --delta-down: #ff6b6b; --delta-flat: #9a9aa2;
+    --chart-line: #8b87f7; --chart-demo: #ff9757; --grid-line: #28282e;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); padding: 8px 8px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 24px; }
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+  .kpi-card { border: 1px solid var(--border); border-radius: 10px; padding: 16px; background: var(--card-bg); }
+  .kpi-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
+  .kpi-value { font-size: 26px; font-weight: 600; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+  .kpi-delta { font-size: 13px; font-weight: 500; }
+  .delta-up { color: var(--delta-up); } .delta-down { color: var(--delta-down); } .delta-flat { color: var(--delta-flat); }
+  section { margin-bottom: 30px; }
+  h2 { font-size: 15px; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+  .chart-wrap { border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: var(--bg); }
+  .chart-wrap svg { display: block; width: 100%; height: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .table-wrap { overflow-x: auto; }
+  .source-note { color: var(--text-faint); font-size: 11px; margin-top: 10px; }
+  .pill { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--pill-bg); color: var(--pill-text); }
+  code { background: var(--code-bg); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+  footer { color: var(--text-faint); font-size: 11px; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 16px; }
+  @media (max-width: 720px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+
+<h1>Weekly Website Traffic</h1>
+<div class="subtitle" id="subtitle"></div>
+<div id="content"></div>
+<footer id="footer"></footer>
+
+<script>
+const GENERATED_AT = "2026-09-21T15:19:22Z";
+const WEEK_LABEL = "Sep 14 – Sep 20, 2026";
+
+const CUR = {"sessions": 2818, "users": 2293, "views": 4355, "bounce": 0.6298793470546487};
+const PRIOR = {"sessions": 3095, "users": 2696, "views": 4176, "bounce": 0.5909531502423263};
+const CHANNELS = [{"name": "Direct", "sessions": 1679, "bounce": 0.6670637284097677}, {"name": "Organic Search", "sessions": 596, "bounce": 0.5302013422818792}, {"name": "Email", "sessions": 220, "bounce": 0.7318181818181818}, {"name": "Referral", "sessions": 116, "bounce": 0.35344827586206895}, {"name": "Organic Social", "sessions": 79, "bounce": 0.569620253164557}, {"name": "Unassigned", "sessions": 63, "bounce": 0.746031746031746}, {"name": "Paid Social", "sessions": 39, "bounce": 0.7435897435897436}, {"name": "AI Assistant", "sessions": 11, "bounce": 0.5454545454545454}, {"name": "Paid Search", "sessions": 5, "bounce": 0.6}, {"name": "Organic Video", "sessions": 3, "bounce": 0.6666666666666666}, {"name": "Paid Other", "sessions": 1, "bounce": 1.0}];
+const TOP_PAGES = [{"page": "/", "sessions": 1964, "views": 3329}, {"page": "/events/inside-creative-at-amazon", "sessions": 161, "views": 204}, {"page": "(not set)", "sessions": 127, "views": 0}, {"page": "/customers", "sessions": 93, "views": 110}, {"page": "/lp/video-skills", "sessions": 66, "views": 94}, {"page": "/jobs", "sessions": 60, "views": 68}, {"page": "/pricing", "sessions": 38, "views": 44}, {"page": "/learn", "sessions": 37, "views": 67}];
+const TREND = [["2026-06-23", 1053, 963], ["2026-06-24", 703, 611], ["2026-06-25", 733, 658], ["2026-06-26", 593, 528], ["2026-06-27", 102, 92], ["2026-06-28", 97, 86], ["2026-06-29", 679, 601], ["2026-06-30", 703, 627], ["2026-07-01", 571, 512], ["2026-07-02", 611, 563], ["2026-07-03", 160, 135], ["2026-07-04", 112, 104], ["2026-07-05", 99, 85], ["2026-07-06", 615, 559], ["2026-07-07", 741, 670], ["2026-07-08", 643, 585], ["2026-07-09", 607, 542], ["2026-07-10", 641, 590], ["2026-07-11", 130, 117], ["2026-07-12", 110, 94], ["2026-07-13", 616, 543], ["2026-07-14", 584, 507], ["2026-07-15", 443, 375], ["2026-07-16", 424, 369], ["2026-07-17", 417, 369], ["2026-07-18", 105, 94], ["2026-07-19", 107, 87], ["2026-07-20", 533, 461], ["2026-07-21", 552, 485], ["2026-07-22", 486, 419], ["2026-07-23", 533, 474], ["2026-07-24", 395, 348], ["2026-07-25", 132, 126], ["2026-07-26", 108, 90], ["2026-07-27", 582, 504], ["2026-07-28", 444, 369], ["2026-07-29", 469, 425], ["2026-07-30", 383, 327], ["2026-07-31", 420, 349], ["2026-08-01", 106, 99], ["2026-08-02", 111, 96], ["2026-08-03", 400, 330], ["2026-08-04", 500, 406], ["2026-08-05", 398, 321], ["2026-08-06", 651, 542], ["2026-08-07", 635, 521], ["2026-08-08", 114, 93], ["2026-08-09", 131, 112], ["2026-08-10", 408, 332], ["2026-08-11", 382, 314], ["2026-08-12", 386, 323], ["2026-08-13", 442, 372], ["2026-08-14", 376, 312], ["2026-08-15", 87, 74], ["2026-08-16", 106, 93], ["2026-08-17", 395, 343], ["2026-08-18", 331, 284], ["2026-08-19", 351, 291], ["2026-08-20", 377, 309], ["2026-08-21", 303, 260], ["2026-08-22", 95, 88], ["2026-08-23", 191, 164], ["2026-08-24", 510, 423], ["2026-08-25", 401, 341], ["2026-08-26", 501, 428], ["2026-08-27", 459, 385], ["2026-08-28", 396, 341], ["2026-08-29", 205, 194], ["2026-08-30", 130, 108], ["2026-08-31", 455, 368], ["2026-09-01", 382, 309], ["2026-09-02", 421, 333], ["2026-09-03", 465, 374], ["2026-09-04", 407, 350], ["2026-09-05", 92, 78], ["2026-09-06", 122, 103], ["2026-09-07", 196, 163], ["2026-09-08", 1145, 1081], ["2026-09-09", 516, 463], ["2026-09-10", 524, 450], ["2026-09-11", 490, 436], ["2026-09-12", 81, 72], ["2026-09-13", 118, 109], ["2026-09-14", 414, 354], ["2026-09-15", 598, 511], ["2026-09-16", 483, 403], ["2026-09-17", 615, 524], ["2026-09-18", 442, 372], ["2026-09-19", 128, 114], ["2026-09-20", 134, 118]];
+const YEAR = [["202509", 3749, 5680], ["202510", 10003, 15673], ["202511", 19570, 24519], ["202512", 11815, 17454], ["202601", 7861, 12015], ["202602", 6914, 10720], ["202603", 9806, 14689], ["202604", 7759, 11020], ["202605", 7563, 10547], ["202606", 15609, 21098], ["202607", 12756, 17029], ["202608", 10373, 15039], ["202609", 7556, 11255]];
+const DEMO_PAGE_PATH = "/demo-request";
+const DEMO_PAGE_CUR = {"sessions": 82, "users": 69, "views": 113};
+const DEMO_PAGE_PRIOR = {"sessions": 57, "users": 43, "views": 66};
+const DEMO_PAGE_TREND = [["2026-07-29", 8], ["2026-07-30", 14], ["2026-07-31", 8], ["2026-08-01", 4], ["2026-08-02", 9], ["2026-08-03", 17], ["2026-08-04", 18], ["2026-08-05", 10], ["2026-08-06", 17], ["2026-08-07", 11], ["2026-08-08", 3], ["2026-08-09", 4], ["2026-08-10", 1], ["2026-08-11", 7], ["2026-08-12", 16], ["2026-08-13", 21], ["2026-08-14", 5], ["2026-08-15", 4], ["2026-08-16", 4], ["2026-08-17", 4], ["2026-08-18", 4], ["2026-08-19", 5], ["2026-08-20", 6], ["2026-08-21", 9], ["2026-08-22", 6], ["2026-08-23", 5], ["2026-08-24", 8], ["2026-08-25", 5], ["2026-08-26", 8], ["2026-08-27", 7], ["2026-08-28", 3], ["2026-08-29", 25], ["2026-08-30", 8], ["2026-08-31", 15], ["2026-09-01", 13], ["2026-09-02", 13], ["2026-09-03", 9], ["2026-09-04", 4], ["2026-09-05", 4], ["2026-09-06", 5], ["2026-09-07", 10], ["2026-09-08", 15], ["2026-09-09", 13], ["2026-09-10", 5], ["2026-09-11", 5], ["2026-09-12", 5], ["2026-09-13", 4], ["2026-09-14", 8], ["2026-09-15", 13], ["2026-09-16", 14], ["2026-09-17", 34], ["2026-09-18", 7], ["2026-09-19", 3], ["2026-09-20", 3]];
+
+function fmtDate(iso) { const d = new Date(iso + "T00:00:00Z"); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }); }
+function fmtYearMonth(ym) { const y = Number(ym.slice(0,4)), m = Number(ym.slice(4,6)); return new Date(y, m-1, 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }); }
+function pct(a,b) { return b ? ((a-b)/b)*100 : null; }
+function deltaHtml(current, prior, invert) {
+  const p = pct(current, prior);
+  if (p === null || !isFinite(p)) return '<span class="kpi-delta delta-flat">no prior data</span>';
+  const good = invert ? p <= 0 : p >= 0;
+  const cls = Math.abs(p) < 0.5 ? 'delta-flat' : (good ? 'delta-up' : 'delta-down');
+  const sign = p > 0 ? '+' : '';
+  return `<span class="kpi-delta ${cls}">${sign}${p.toFixed(1)}% vs prior week</span>`;
+}
+
+function lineChartSVG(labels, values, opts) {
+  opts = opts || {};
+  const W = 680, H = 190, padL = 34, padR = 8, padT = 10, padB = 20;
+  const innerW = W - padL - padR, innerH = H - padT - padB, n = values.length;
+  const maxV = (Math.max.apply(null, values) * 1.15) || 1;
+  const x = i => padL + (n === 1 ? 0 : i * (innerW / (n - 1)));
+  const y = v => padT + innerH - (v / maxV) * innerH;
+  const pts = values.map((v, i) => [x(i), y(v)]);
+  const linePath = "M" + pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" L");
+  const baseline = padT + innerH;
+  const areaPath = linePath + ` L${x(n-1).toFixed(1)},${baseline} L${x(0).toFixed(1)},${baseline} Z`;
+  const gridLines = [0,0.5,1].map(f => { const yy = y(maxV*f); return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}" stroke="var(--grid-line)" stroke-width="1"/>`; }).join('');
+  const maxLabels = opts.maxLabels || 7, step = Math.max(1, Math.ceil(n / maxLabels));
+  let labelEls = '';
+  for (let i = 0; i < n; i += step) labelEls += `<text x="${x(i).toFixed(1)}" y="${H-4}" font-size="10" fill="var(--text-faint)" text-anchor="middle">${labels[i]}</text>`;
+  const lastX = x(n-1), lastY = y(values[n-1]);
+  return `<svg viewBox="0 0 ${W} ${H}">${gridLines}<path d="${areaPath}" fill="var(--chart-line)" opacity="0.12" stroke="none"/><path d="${linePath}" fill="none" stroke="var(--chart-line)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="3.5" fill="var(--chart-line)"/><circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="6.5" fill="none" stroke="var(--chart-line)" stroke-width="1.3" opacity="0.5"/>${labelEls}</svg>`;
+}
+
+function barChartSVG(labels, values, opts) {
+  opts = opts || {};
+  const W = 680, H = 190, padL = 34, padR = 8, padT = 12, padB = 20;
+  const innerW = W - padL - padR, innerH = H - padT - padB, n = values.length;
+  const maxV = (Math.max.apply(null, values) * 1.15) || 1;
+  const gap = opts.gap != null ? opts.gap : (n > 30 ? 1.5 : 6);
+  const barW = (innerW - (n-1)*gap) / n, baseline = padT + innerH;
+  const y = v => baseline - (v / maxV) * innerH;
+  const color = opts.color || 'var(--chart-line)';
+  let bars = '', labelEls = '';
+  const maxLabels = opts.maxLabels || 12, step = Math.max(1, Math.ceil(n / maxLabels));
+  for (let i = 0; i < n; i++) {
+    const bx = padL + i*(barW+gap), by = y(values[i]), bh = baseline - by;
+    bars += `<rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${barW.toFixed(1)}" height="${bh.toFixed(1)}" rx="2" fill="${color}"><title>${labels[i]}: ${values[i].toLocaleString()}</title></rect>`;
+    if (i % step === 0) labelEls += `<text x="${(bx+barW/2).toFixed(1)}" y="${H-4}" font-size="10" fill="var(--text-faint)" text-anchor="middle">${labels[i]}</text>`;
+  }
+  const gridLines = [0,0.5,1].map(f => { const yy = y(maxV*f); return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}" stroke="var(--grid-line)" stroke-width="1"/>`; }).join('');
+  return `<svg viewBox="0 0 ${W} ${H}">${gridLines}${bars}${labelEls}</svg>`;
+}
+
+document.getElementById('subtitle').innerHTML = `Capsule.video &middot; ${WEEK_LABEL} vs prior week &middot; <span class="pill">GA4 via Google Analytics MCP</span>`;
+
+const yearTotalSessions = YEAR.reduce((s,r)=>s+r[1],0);
+const yearTotalViews = YEAR.reduce((s,r)=>s+r[2],0);
+const avgMonthlySessions = Math.round(yearTotalSessions / YEAR.length);
+const peak = YEAR.reduce((best,r)=> (r[1] > (best?best[1]:0) ? r : best), null);
+
+document.getElementById('content').innerHTML = `
+  <div class="kpi-row">
+    <div class="kpi-card"><div class="kpi-label">Users</div><div class="kpi-value">${CUR.users.toLocaleString()}</div>${deltaHtml(CUR.users,PRIOR.users)}</div>
+    <div class="kpi-card"><div class="kpi-label">Sessions</div><div class="kpi-value">${CUR.sessions.toLocaleString()}</div>${deltaHtml(CUR.sessions,PRIOR.sessions)}</div>
+    <div class="kpi-card"><div class="kpi-label">Pageviews</div><div class="kpi-value">${CUR.views.toLocaleString()}</div>${deltaHtml(CUR.views,PRIOR.views)}</div>
+    <div class="kpi-card"><div class="kpi-label">Bounce Rate</div><div class="kpi-value">${(CUR.bounce*100).toFixed(1)}%</div>${deltaHtml(CUR.bounce*100,PRIOR.bounce*100,true)}</div>
+  </div>
+  <section><h2>Sessions — last 90 days</h2><div class="chart-wrap">${lineChartSVG(TREND.map(r=>fmtDate(r[0])), TREND.map(r=>r[1]), {maxLabels:8})}</div></section>
+  <section>
+    <h2>Total traffic — past 12 months</h2>
+    <div class="kpi-row" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 14px;">
+      <div class="kpi-card"><div class="kpi-label">Total Sessions</div><div class="kpi-value">${yearTotalSessions.toLocaleString()}</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Pageviews</div><div class="kpi-value">${yearTotalViews.toLocaleString()}</div></div>
+      <div class="kpi-card"><div class="kpi-label">Avg Sessions / Month</div><div class="kpi-value">${avgMonthlySessions.toLocaleString()}</div></div>
+    </div>
+    <div class="chart-wrap">${barChartSVG(YEAR.map(r=>fmtYearMonth(r[0])), YEAR.map(r=>r[1]))}</div>
+    <div class="source-note">Grouped by calendar month; first/last bars may be partial months. Peak month: ${fmtYearMonth(peak[0])} (${peak[1].toLocaleString()} sessions).</div>
+  </section>
+  <div class="two-col">
+    <section><h2>Traffic by channel</h2><div class="table-wrap"><table><thead><tr><th>Channel</th><th class="num">Sessions</th><th class="num">Bounce</th></tr></thead><tbody>${CHANNELS.slice().sort((a,b)=>b.sessions-a.sessions).map(c=>`<tr><td>${c.name}</td><td class="num">${c.sessions.toLocaleString()}</td><td class="num">${(c.bounce*100).toFixed(0)}%</td></tr>`).join('')}</tbody></table></div></section>
+    <section><h2>Top landing pages</h2><div class="table-wrap"><table><thead><tr><th>Page</th><th class="num">Sessions</th><th class="num">Views</th></tr></thead><tbody>${TOP_PAGES.slice().sort((a,b)=>b.sessions-a.sessions).map(p=>`<tr><td>${p.page}</td><td class="num">${p.sessions.toLocaleString()}</td><td class="num">${p.views.toLocaleString()}</td></tr>`).join('')}</tbody></table></div></section>
+  </div>
+  <section>
+    <h2>Demo Request Page <span class="pill">${DEMO_PAGE_PATH}</span></h2>
+    <div class="kpi-row" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 14px;">
+      <div class="kpi-card"><div class="kpi-label">Sessions this week</div><div class="kpi-value">${DEMO_PAGE_CUR.sessions.toLocaleString()}</div>${deltaHtml(DEMO_PAGE_CUR.sessions,DEMO_PAGE_PRIOR.sessions)}</div>
+      <div class="kpi-card"><div class="kpi-label">Users this week</div><div class="kpi-value">${DEMO_PAGE_CUR.users.toLocaleString()}</div>${deltaHtml(DEMO_PAGE_CUR.users,DEMO_PAGE_PRIOR.users)}</div>
+      <div class="kpi-card"><div class="kpi-label">Pageviews this week</div><div class="kpi-value">${DEMO_PAGE_CUR.views.toLocaleString()}</div>${deltaHtml(DEMO_PAGE_CUR.views,DEMO_PAGE_PRIOR.views)}</div>
+    </div>
+    <div class="chart-wrap">${barChartSVG(DEMO_PAGE_TREND.map(r=>fmtDate(r[0])), DEMO_PAGE_TREND.map(r=>r[1]), {color:'var(--chart-demo)', maxLabels:8})}</div>
+    <div class="source-note">Front door to the demo-booking flow, launched around Jul 29, 2026. Includes a stray <code>/demo-request.html</code> variant seen in GA4 alongside <code>/demo-request</code>.</div>
+  </section>
+`;
+
+document.getElementById('footer').textContent = "Data snapshot generated " + new Date(GENERATED_AT).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) + " UTC. Rebuilt from Google Analytics MCP — republish to refresh.";
+</script>
+
+</body>
+</html>
